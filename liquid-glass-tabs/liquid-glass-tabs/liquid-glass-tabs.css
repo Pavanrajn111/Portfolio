@@ -1,0 +1,104 @@
+/* Liquid Glass Tabs — drop-in component. Theme via the CSS variables below. */
+.lgt {
+  --lgt-height: 66px;
+  --lgt-pad: 8px;
+  --lgt-font: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --lgt-font-size: 17px;
+  --lgt-text: #8d8d8d;          /* inactive label */
+  --lgt-text-active: #262626;   /* label under the lens */
+  --lgt-track: rgba(0, 0, 0, 0.045);
+  --lgt-track-edge: rgba(255, 255, 255, 0.45);
+  --lgt-glass: rgba(255, 255, 255, 0.14);
+  --lgt-rim: rgba(255, 255, 255, 0.85);
+
+  position: relative;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  align-items: center;
+  height: var(--lgt-height);
+  padding: 0 var(--lgt-pad);
+  border-radius: 999px;
+  background: var(--lgt-track);
+  box-shadow:
+    inset 0 2px 5px rgba(0, 0, 0, 0.10),
+    inset 0 -1px 0 var(--lgt-track-edge),
+    0 1px 0 rgba(255, 255, 255, 0.25);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-y;
+  font-family: var(--lgt-font);
+}
+
+.lgt-tab {
+  position: relative;
+  z-index: 2;                    /* labels stay crisp above the glass */
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: 500 var(--lgt-font-size)/1 var(--lgt-font);
+  letter-spacing: -0.01em;
+  color: var(--lgt-text);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+}
+.lgt-tab:focus-visible { box-shadow: inset 0 0 0 2px rgba(60, 120, 255, 0.55); border-radius: 999px; }
+
+.lgt-lens {
+  position: absolute;
+  z-index: 1;
+  top: calc(var(--lgt-pad) * 0.5 + 1px);
+  bottom: calc(var(--lgt-pad) * 0.5 + 1px);
+  left: 0;
+  width: 0;
+  border-radius: 999px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 30%),
+    var(--lgt-glass);
+  -webkit-backdrop-filter: blur(1.5px) saturate(1.35) brightness(1.05);
+          backdrop-filter: blur(1.5px) saturate(1.35) brightness(1.05);
+  box-shadow:
+    inset 0 0 0 1px var(--lgt-rim),
+    inset 0 2px 4px rgba(255, 255, 255, 0.40),
+    inset 0 -4px 8px rgba(0, 0, 0, 0.08),
+    inset 6px 0 10px -6px rgba(120, 190, 255, 0.28),   /* cool refraction, left */
+    inset -6px 0 10px -6px rgba(255, 160, 210, 0.25),  /* warm refraction, right */
+    0 8px 18px rgba(0, 0, 0, 0.16),
+    0 2px 4px rgba(0, 0, 0, 0.10);
+  will-change: transform, width;
+  cursor: grab;
+  touch-action: none;
+}
+.lgt-lens.is-dragging { cursor: grabbing; }
+
+/* thin iridescent ring on the lens edge */
+.lgt-lens::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: linear-gradient(90deg,
+    rgba(140, 210, 255, 0.45), rgba(255,255,255,0) 18%,
+    rgba(255,255,255,0) 82%, rgba(255, 170, 215, 0.45));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none;
+}
+/* top specular highlight */
+.lgt-lens::after {
+  content: "";
+  position: absolute;
+  left: 14%; right: 14%; top: 3px; height: 28%;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.45), rgba(255,255,255,0));
+  filter: blur(1px);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lgt-lens { transition: none; }
+}

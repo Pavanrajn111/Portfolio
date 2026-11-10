@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Expanding Accordion Gallery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="expanding-accordion-gallery.css">
+<style>
+html,body{height:100%;margin:0}
+body{display:grid;place-items:center;background:radial-gradient(ellipse at 50% 0%,#14161c,#050608 70%);font-family:"Inter",system-ui,sans-serif}
+.wrap{width:min(640px,92vw)}
+</style>
+</head>
+<body>
+  <div class="wrap">
+  <section class="eag" id="gallery" aria-label="Gallery">
+    <button class="eag-panel" style="--art:radial-gradient(ellipse 18% 55% at 55% 58%, #ffcf6b 0%, #c98a2b 35%, transparent 70%), radial-gradient(ellipse 90% 60% at 50% 15%, #2f6fb5 0%, #16345c 45%, transparent 80%), linear-gradient(#0c1a2e, #07101c 60%, #1a1208)" aria-label="Polar Studio">
+      <div class="eag-art"></div>
+      <span class="eag-num">01</span>
+      <div class="eag-foot">
+        <p class="eag-caption">A shard of light climbs from black water into a torn sky.</p>
+        <div class="eag-meta"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.500-7-10V6z"/></svg><span class="eag-title">Polar Studio</span></div>
+      </div>
+    </button>
+    <button class="eag-panel" style="--art:linear-gradient(115deg, transparent 35%, rgba(255,120,40,.85) 48%, transparent 58%), radial-gradient(ellipse 80% 60% at 70% 70%, #b33a12 0%, #4a1608 55%, #120805 100%)" aria-label="Ember Drift">
+      <div class="eag-art"></div>
+      <span class="eag-num">02</span>
+      <div class="eag-foot">
+        <p class="eag-caption">Slow heat moves across the frame like a held breath.</p>
+        <div class="eag-meta"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 1-11.800 7L4 20l1.200-4A8 8 0 1 1 20 12z"/></svg><span class="eag-title">Ember Drift</span></div>
+      </div>
+    </button>
+    <button class="eag-panel" style="--art:radial-gradient(circle at 30% 30%, rgba(190,210,235,.55) 0 6%, transparent 7%), radial-gradient(circle at 65% 55%, rgba(190,210,235,.35) 0 4%, transparent 5%), linear-gradient(160deg, #3b4658, #12171f 55%, #05070a)" aria-label="Glass Cargo">
+      <div class="eag-art"></div>
+      <span class="eag-num">03</span>
+      <div class="eag-foot">
+        <p class="eag-caption">Cold glass and quiet machinery, stacked in the dark.</p>
+        <div class="eag-meta"><svg viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="eag-title">Glass Cargo</span></div>
+      </div>
+    </button>
+    <button class="eag-panel" style="--art:radial-gradient(circle at 50% 33%, #fff3cf 0 7%, #e6d4a0 9%, rgba(230,212,160,.18) 16%, transparent 28%), radial-gradient(ellipse 70% 40% at 55% 75%, #8a5a3a 0%, #3a2416 55%, transparent 85%), linear-gradient(#1a130c, #0a0706)" aria-label="First Contact">
+      <div class="eag-art"></div>
+      <span class="eag-num">04</span>
+      <div class="eag-foot">
+        <p class="eag-caption">An open palm meets a small light, and the frame holds its breath.</p>
+        <div class="eag-meta"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="10" rx="3"/><circle cx="16" cy="12" r="1.200"/></svg><span class="eag-title">First Contact</span></div>
+      </div>
+    </button>
+    <button class="eag-panel" style="--art:radial-gradient(ellipse 35% 45% at 50% 45%, #8a63e8 0%, #4a2a9a 40%, transparent 72%), radial-gradient(ellipse 25% 25% at 62% 30%, #e7b45a 0%, transparent 70%), linear-gradient(#120d22, #07050d)" aria-label="Bent Light">
+      <div class="eag-art"></div>
+      <span class="eag-num">05</span>
+      <div class="eag-foot">
+        <p class="eag-caption">A creased sheet of metal throws violet and gold in every direction.</p>
+        <div class="eag-meta"><svg viewBox="0 0 24 24"><path d="M12 3l1.800 5.200L19 10l-5.200 1.800L12 17l-1.800-5.200L5 10l5.200-1.800z"/><path d="M19 16v4M17 18h4"/></svg><span class="eag-title">Bent Light</span></div>
+      </div>
+    </button>
+  </section>
+  </div>
+<script src="expanding-accordion-gallery.js"></script>
+<script>
+new ExpandingAccordion(document.getElementById("gallery"),{initial:3,trigger:"hover"});
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Liquid Glass Tabs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="liquid-glass-tabs.css">
+<style>
+  html, body { height: 100%; margin: 0; }
+  body {
+    display: grid; place-items: center; align-content: center; gap: 28px;
+    background: linear-gradient(180deg, #d7d7d7 0%, #d1d1d1 45%, #8a8a8e 78%, #4d4d52 100%);
+    font-family: "Inter", system-ui, sans-serif;
+  }
+  .demo { width: min(560px, 92vw); }
+  .hint { text-align: center; margin-top: 44px; font-size: 14px; color: rgba(60,60,67,.55); }
+</style>
+</head>
+<body>
+  <div class="demo">
+    <nav class="lgt" id="nav" aria-label="Sections">
+      <div class="lgt-lens"></div>
+      <button class="lgt-tab">Work</button>
+      <button class="lgt-tab">Studio</button>
+      <button class="lgt-tab">Journal</button>
+      <button class="lgt-tab">Contact</button>
+    </nav>
+    <p class="hint">Click a tab, drag the lens, or use ← →</p>
+  </div>
+  <script src="liquid-glass-tabs.js"></script>
+  <script>
+    new LiquidGlassTabs(document.getElementById('nav'), {
+      initial: 3,
+      onChange: (i, btn) => console.log('tab', i, btn.textContent)
+    });
+  </script>
+</body>
+</html>

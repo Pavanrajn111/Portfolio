@@ -1,0 +1,104 @@
+/* Expanding Accordion Gallery — theme via CSS variables on .eag */
+.eag {
+  --eag-height: 400px;
+  --eag-gap: 14px;
+  --eag-radius: 18px;
+  --eag-collapsed: 1;        /* flex weight of a closed panel */
+  --eag-open: 5.4;           /* flex weight of the open panel */
+  --eag-speed: 0.65s;
+  --eag-ease: cubic-bezier(0.22, 0.9, 0.24, 1);
+  --eag-bg: #0b0c10;
+  --eag-text: #f2f2f4;
+  --eag-muted: rgba(255, 255, 255, 0.55);
+  --eag-font: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  container-type: inline-size;
+  display: flex;
+  gap: var(--eag-gap);
+  height: var(--eag-height);
+  font-family: var(--eag-font);
+  color: var(--eag-text);
+}
+
+.eag-panel {
+  position: relative;
+  flex: var(--eag-collapsed) 1 0;
+  min-width: 0;
+  overflow: hidden;
+  border: 0; padding: 0; text-align: left;
+  border-radius: var(--eag-radius);
+  background: var(--eag-bg);
+  color: inherit; font: inherit;
+  cursor: pointer;
+  isolation: isolate;
+  transition: flex-grow var(--eag-speed) var(--eag-ease);
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.eag-panel.is-active { flex-grow: var(--eag-open); cursor: default; }
+.eag-panel:focus-visible { box-shadow: 0 0 0 2px rgba(255,255,255,.6); }
+
+/* artwork: fixed width so closed panels show a centred slice, not a squashed image */
+.eag-art {
+  position: absolute; top: 0; bottom: 0; left: 50%;
+  width: 54cqw; transform: translateX(-50%);
+  background: var(--img, var(--art)) center / cover no-repeat;
+  opacity: 0.55; filter: saturate(0.85);
+  transition: opacity var(--eag-speed) var(--eag-ease), filter var(--eag-speed) var(--eag-ease);
+  z-index: -2;
+}
+.eag-panel.is-active .eag-art { opacity: 1; filter: none; }
+.eag-panel:not(.is-active):hover .eag-art { opacity: 0.75; }
+
+/* bottom fade so text is readable */
+.eag-panel::after {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(180deg, rgba(5,6,8,0) 38%, rgba(5,6,8,.55) 68%, rgba(5,6,8,.92) 100%);
+  pointer-events: none;
+}
+
+.eag-num {
+  position: absolute; top: 16px; left: 50%; transform: translateX(-50%);
+  font-size: 12px; font-weight: 600; letter-spacing: .04em;
+  color: rgba(255,255,255,.75);
+  transition: left var(--eag-speed) var(--eag-ease), transform var(--eag-speed) var(--eag-ease), color .3s;
+}
+.eag-panel.is-active .eag-num { left: 18px; transform: none; color: #fff; }
+
+.eag-foot {
+  position: absolute; left: 0; right: 0; bottom: 18px;
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+  padding: 0 18px;
+}
+.eag-caption {
+  max-width: 34ch; margin: 0; text-align: center;
+  font-size: 13px; line-height: 1.45; color: var(--eag-muted);
+  max-height: 0; opacity: 0; overflow: hidden; transform: translateY(8px);
+  transition: opacity .4s ease, transform .5s var(--eag-ease), max-height .5s var(--eag-ease);
+}
+.eag-panel.is-active .eag-caption {
+  max-height: 5em; opacity: 1; transform: none;
+  transition-delay: .18s;
+}
+.eag-meta { display: flex; align-items: center; gap: 10px; color: rgba(255,255,255,.6); }
+.eag-meta svg { width: 16px; height: 16px; flex: none; stroke: currentColor; fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.eag-title {
+  font-size: 12.5px; font-weight: 500; white-space: nowrap;
+  max-width: 0; opacity: 0; overflow: hidden;
+  transition: max-width var(--eag-speed) var(--eag-ease), opacity .35s ease;
+}
+.eag-panel.is-active .eag-title { max-width: 220px; opacity: 1; color: #fff; transition-delay: .12s; }
+.eag-panel.is-active .eag-meta { gap: 10px; }
+.eag-panel:not(.is-active) .eag-meta { gap: 0; }
+
+/* phones: stack vertically */
+@container (max-width: 520px) {
+  .eag { flex-direction: column; height: 560px; }
+  .eag-art { width: 100cqw; height: 100%; }
+  .eag-art { top: 50%; bottom: auto; left: 0; transform: translateY(-50%); height: 380px; }
+  .eag-num { top: 50%; left: 18px; transform: translateY(-50%); }
+  .eag-panel.is-active .eag-num { top: 16px; transform: none; }
+  .eag-foot { flex-direction: row; justify-content: flex-start; bottom: 50%; transform: translateY(50%); }
+  .eag-panel.is-active .eag-foot { bottom: 16px; transform: none; flex-direction: column; align-items: center; }
+}
+@media (prefers-reduced-motion: reduce) { .eag *, .eag { transition-duration: .01s !important; } }

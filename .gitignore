@@ -1,0 +1,19 @@
+# Archive & media backups
+*.zip
+*.mp4
+Screenshot*.png
+portfolio (1)/
+scratch/
+
+# OS metadata
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo

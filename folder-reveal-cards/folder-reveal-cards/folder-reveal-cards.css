@@ -1,0 +1,127 @@
+/* Folder Reveal Cards — theme per card via CSS variables on .frc-card */
+.frc {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 26px;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+.frc-card {
+  /* geometry */
+  --w: 198px;  --hgt: 276px;
+  --h-rest: 52px;   /* image height visible at rest */
+  --h-open: 126px;  /* image height on hover */
+  --nl: 124px;      /* where the notch starts (px, from left) */
+  --nh: 24px;       /* notch depth */
+  --r: 13px;        /* notch corner radius */
+  --speed: .6s;  --ease: cubic-bezier(.2,.9,.25,1);
+  /* theme (override per card) */
+  --art: linear-gradient(135deg,#8f6cff,#4a2fc2 60%,#2a1a7a);
+  --body: linear-gradient(180deg,#221a73,#120e3c);
+  --num: #e9e9f7;  --title: #e2e2f2;  --muted: rgba(226,226,242,.38);
+  --ring: rgba(20,14,60,.9);  --glow: rgba(110,80,255,.18);
+
+  position: relative; display: block; flex: none;
+  width: var(--w); height: var(--hgt);
+  border-radius: 18px; overflow: hidden; isolation: isolate;
+  text-decoration: none; color: inherit; cursor: pointer; outline: none;
+  background: var(--art);
+  box-shadow: 0 0 0 2px var(--ring), 0 0 0 7px rgba(255,255,255,.015), 0 18px 40px -12px var(--glow);
+  -webkit-tap-highlight-color: transparent;
+}
+.frc-card:focus-visible { box-shadow: 0 0 0 2px var(--ring), 0 0 0 5px rgba(120,160,255,.7); }
+
+/* image layer + diagonal sheen */
+.frc-art { position: absolute; inset: 0; z-index: 0; background: var(--art); }
+.frc-art::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(105deg, transparent 38%, rgba(255,255,255,.28) 50%, transparent 60%);
+  opacity: .8; transition: transform var(--speed) var(--ease);
+}
+.frc-card:hover .frc-art::after, .frc-card.is-open .frc-art::after { transform: translateX(14%); }
+
+/* object that pops out of the image area */
+.frc-obj {
+  position: absolute; left: 0; right: 0; top: 0; height: var(--h-open); z-index: 1;
+  display: grid; place-items: center; pointer-events: none;
+  opacity: 0; transform: translateY(26px) scale(.82);
+  transition: opacity .35s ease, transform var(--speed) var(--ease);
+}
+.frc-obj svg { width: 100%; height: 100%; overflow: visible; }
+.frc-card:hover .frc-obj, .frc-card:focus-visible .frc-obj, .frc-card.is-open .frc-obj {
+  opacity: 1; transform: none; transition-delay: .05s;
+}
+
+/* notched body */
+.frc-body {
+  position: absolute; left: 0; right: 0; bottom: 0; top: var(--h-rest); z-index: 2;
+  background: var(--body);
+  transition: top var(--speed) var(--ease);
+  -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+  -webkit-mask-image:
+    linear-gradient(#000,#000),
+    radial-gradient(circle at 0 100%, #000 calc(var(--r) - .5px), transparent var(--r)),
+    linear-gradient(#000,#000),
+    linear-gradient(#000,#000),
+    radial-gradient(circle at 100% 0, transparent calc(var(--r) - .5px), #000 var(--r));
+          mask-image:
+    linear-gradient(#000,#000),
+    radial-gradient(circle at 0 100%, #000 calc(var(--r) - .5px), transparent var(--r)),
+    linear-gradient(#000,#000),
+    linear-gradient(#000,#000),
+    radial-gradient(circle at 100% 0, transparent calc(var(--r) - .5px), #000 var(--r));
+  -webkit-mask-position:
+    0 0,
+    calc(var(--nl) - var(--r)) 0,
+    calc(var(--nl) - var(--r)) var(--r),
+    calc(var(--nl) - 1px) var(--nh),
+    var(--nl) calc(var(--nh) - var(--r));
+          mask-position:
+    0 0,
+    calc(var(--nl) - var(--r)) 0,
+    calc(var(--nl) - var(--r)) var(--r),
+    calc(var(--nl) - 1px) var(--nh),
+    var(--nl) calc(var(--nh) - var(--r));
+  -webkit-mask-size:
+    calc(var(--nl) - var(--r) + 1px) 100%,
+    var(--r) var(--r),
+    calc(var(--r) + 1px) calc(100% - var(--r)),
+    calc(100% - var(--nl) + 1px) calc(100% - var(--nh)),
+    var(--r) var(--r);
+          mask-size:
+    calc(var(--nl) - var(--r) + 1px) 100%,
+    var(--r) var(--r),
+    calc(var(--r) + 1px) calc(100% - var(--r)),
+    calc(100% - var(--nl) + 1px) calc(100% - var(--nh)),
+    var(--r) var(--r);
+}
+.frc-card:hover .frc-body, .frc-card:focus-visible .frc-body, .frc-card.is-open .frc-body { top: var(--h-open); }
+
+.frc-num {
+  position: absolute; left: 17px; top: 17px;
+  font-size: 40px; font-weight: 800; letter-spacing: -.03em; line-height: 1; color: var(--num);
+}
+.frc-arrow {
+  position: absolute; right: 21px; top: 33px; width: 10px; height: 10px;
+  stroke: var(--num); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+  transition: transform .4s var(--ease);
+}
+.frc-card:hover .frc-arrow, .frc-card.is-open .frc-arrow { transform: translate(2px,-2px); }
+
+.frc-foot { position: absolute; left: 17px; right: 17px; bottom: 20px; }
+.frc-title { margin: 0 0 6px; font-size: 11px; font-weight: 700; color: var(--title); }
+.frc-text  { margin: 0; font-size: 10px; line-height: 1.5; color: var(--muted); }
+
+/* ---- card themes (matching the video) ---- */
+.frc-card.t-violet { }
+.frc-card.t-light {
+  --art: linear-gradient(135deg,#f08a6a,#e0607a 55%,#b04a8a);
+  --body: linear-gradient(180deg,#e8e8ea 0%,#dcdcdf 40%,#8f8f93 100%);
+  --num: #121212; --title: #161616; --muted: rgba(30,30,30,.5);
+  --ring: #c9ccd6; --glow: rgba(255,255,255,.12);
+}
+.frc-card.t-slate {
+  --art: linear-gradient(135deg,#7f93ad,#c6d4e4 45%,#8aa0bb);
+  --body: linear-gradient(180deg,#1b2025,#13171b);
+  --num: #f1f4f8; --title: #e8ecf0; --muted: rgba(232,236,240,.35);
+  --ring: rgba(10,14,20,.9); --glow: rgba(120,160,220,.12);
+}
+@media (prefers-reduced-motion: reduce) { .frc-card * { transition-duration: .01s !important; } }
