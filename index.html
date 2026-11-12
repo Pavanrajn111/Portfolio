@@ -19,6 +19,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles/hologram.css" />
     <link rel="stylesheet" href="contact-cinematic.css" />
     <link rel="stylesheet" href="resume-cinematic.css" />
     <link rel="stylesheet" href="certifications.css" />
@@ -46,11 +47,39 @@
         <section id="home" class="hero">
           <h1 class="sr-only hero-sr-heading">Pavan Raj N — Software Engineering Portfolio</h1>
           <div class="hero-artwork">
-            <img
-              class="hero-reference"
-              src="Screenshot 2026-11-10 190738.png"
-              alt="Pavan Raj N, Information Science and Engineering student, building, learning, and creating."
-            />
+            <div class="pv-stage" aria-hidden="true">
+              <div class="pv-word"><div class="w-dim"></div><div class="w-hold"><div class="w-pool"></div><div class="w-breath"></div></div><div class="w-rise"></div><div class="w-sweep"></div><div class="w-down"></div><div class="w-flare"></div></div>
+              <div class="pv-wordg"><div class="a"></div><div class="b"></div></div>
+              <canvas class="pv-particles"></canvas>
+              <div class="pv-beam"></div>
+              <div class="pv-base">
+                <svg viewBox="0 0 400 400">
+                  <circle class="charge" cx="200" cy="200" r="190" fill="none" stroke="#e8feff" stroke-width="4"/>
+                  <g class="r-out">
+                    <circle cx="200" cy="200" r="190" fill="none" stroke="#19e6ff" stroke-width="1.6" stroke-dasharray="3 9" opacity=".85"/>
+                    <circle class="node" cx="390" cy="200" r="4.5" style="animation-delay:0s"/>
+                    <circle class="node" cx="295" cy="364.5" r="4.5" style="animation-delay:.4s"/>
+                    <circle class="node" cx="105" cy="364.5" r="4.5" style="animation-delay:.8s"/>
+                    <circle class="node" cx="10" cy="200" r="4.5" style="animation-delay:1.2s"/>
+                    <circle class="node" cx="105" cy="35.5" r="4.5" style="animation-delay:1.6s"/>
+                    <circle class="node" cx="295" cy="35.5" r="4.5" style="animation-delay:2s"/>
+                  </g>
+                  <circle class="r-seg" cx="200" cy="200" r="160" pathLength="100" fill="none" stroke="#19e6ff" stroke-width="7" stroke-dasharray="30 4 20 4 30 4 6 2" opacity=".75"/>
+                  <circle class="r-seg2" cx="200" cy="200" r="135" pathLength="100" fill="none" stroke="#7ff3ff" stroke-width="3" stroke-dasharray="17 4 17 4 17 4 17 4 8 8" opacity=".9"/>
+                  <circle cx="200" cy="200" r="108" fill="none" stroke="#19e6ff" stroke-width="1" opacity=".6"/>
+                  <circle cx="200" cy="200" r="70" fill="rgba(25,230,255,.18)" stroke="#19e6ff" stroke-width="2"/>
+                  <circle class="rip" cx="200" cy="200" r="100" fill="none" stroke="#19e6ff" stroke-width="2.5"/>
+                  <circle class="rip" cx="200" cy="200" r="100" fill="none" stroke="#19e6ff" stroke-width="2.5" style="animation-delay:1.2s"/>
+                  <circle class="rip" cx="200" cy="200" r="100" fill="none" stroke="#19e6ff" stroke-width="2.5" style="animation-delay:2.4s"/>
+                </svg>
+              </div>
+              <div class="pv-holo">
+                <div class="pv-tilt"><div class="pv-float">
+                  <div class="pv-clip"><div class="pv-photo"></div><div class="pv-tint"></div><div class="pv-lines"></div><div class="pv-ghost a"></div><div class="pv-ghost b"></div></div>
+                  <div class="pv-bar"></div>
+                </div></div>
+              </div>
+            </div>
             <a class="hero-hotspot hero-hotspot-work" href="#projects" aria-label="Explore my work"></a>
             <a class="hero-hotspot hero-hotspot-scroll" href="#about" aria-label="Scroll to explore"></a>
             <a
@@ -78,7 +107,7 @@
         <section id="about" class="about section reveal">
           <div class="section-glow section-glow-about" aria-hidden="true"></div>
           <div class="section-ghost" data-ghost aria-hidden="true">ABOUT</div>
-          <div class="section-heading">
+          <div class="section-heading cine-reveal" style="--cine-delay: 0ms">
             <p class="eyebrow">About Me</p>
             <h2>
               <span class="cine-word"><span>Building</span></span>
@@ -201,7 +230,7 @@
         <section id="skills" class="skills section reveal">
           <div class="section-glow section-glow-skills" aria-hidden="true"></div>
           <div class="section-ghost" data-ghost aria-hidden="true">SKILLS</div>
-          <div class="section-heading narrow">
+          <div class="section-heading narrow cine-reveal" style="--cine-delay: 0ms">
             <p class="eyebrow">Technical Skills &amp; Tooling</p>
             <h2>
               <span class="cine-word"><span class="skills-highlight">Technologies</span></span>
@@ -363,7 +392,7 @@
         <section id="focus-areas" class="focus-areas section reveal">
           <div class="section-glow section-glow-focus-areas" aria-hidden="true"></div>
           <div class="section-ghost" data-ghost aria-hidden="true">FOCUS</div>
-          <div class="section-heading narrow">
+          <div class="section-heading narrow cine-reveal" style="--cine-delay: 0ms">
             <p class="eyebrow">Core Focus Areas</p>
             <h2><span class="cine-word"><span>Building</span></span> <span class="cine-word"><span>fundamentals</span></span> <span class="cine-word"><span>and</span></span> <span class="cine-word"><span>applying</span></span> <span class="cine-word"><span>them</span></span> <span class="cine-word"><span>to</span></span> <span class="cine-word"><span>practical</span></span> <span class="cine-word"><span>problems.</span></span></h2>
           </div>
@@ -434,7 +463,7 @@
         <section id="projects" class="projects section reveal">
           <div class="section-glow section-glow-projects" aria-hidden="true"></div>
           <div class="section-ghost" data-ghost aria-hidden="true">PROJECTS</div>
-          <div class="section-heading">
+          <div class="section-heading cine-reveal" style="--cine-delay: 0ms">
             <p class="eyebrow">Featured Projects</p>
             <h2><span class="cine-word"><span>Selected</span></span> <span class="cine-word"><span>work</span></span> <span class="cine-word"><span>across</span></span> <span class="cine-word"><span>climate,</span></span> <span class="cine-word"><span>HR</span></span> <span class="cine-word"><span>and</span></span> <span class="cine-word"><span>full-stack</span></span> <span class="cine-word"><span>applications.</span></span></h2>
           </div>
@@ -556,7 +585,7 @@
         <section id="certifications" class="certifications section reveal" aria-labelledby="cert-heading">
           <div class="section-glow section-glow-certifications" aria-hidden="true"></div>
           <div class="section-ghost" data-ghost aria-hidden="true">CREDENTIALS</div>
-          <div class="cert-section-heading">
+          <div class="cert-section-heading cine-reveal" style="--cine-delay: 0ms">
             <p class="eyebrow">Credentials &amp; milestones</p>
             <h2 id="cert-heading"><span class="cine-word"><span>Certifications</span></span> <span class="cine-word"><span>&amp;</span></span> <span class="cine-word"><span>Achievements</span></span></h2>
             <p>Professional learning, technical coursework and participation milestones.</p>
@@ -624,7 +653,7 @@
         <section id="journey" class="journey section reveal">
           <div class="section-glow section-glow-journey" aria-hidden="true"></div>
           <div class="section-ghost" data-ghost aria-hidden="true">JOURNEY</div>
-          <div class="section-heading narrow">
+          <div class="section-heading narrow cine-reveal" style="--cine-delay: 0ms">
             <p class="eyebrow">My Journey</p>
             <h2><span class="cine-word"><span>Continuous</span></span> <span class="cine-word"><span>learning</span></span> <span class="cine-word"><span>grounded</span></span> <span class="cine-word"><span>in</span></span> <span class="cine-word"><span>practical</span></span> <span class="cine-word"><span>engineering</span></span> <span class="cine-word"><span>and</span></span> <span class="cine-word"><span>problem</span></span> <span class="cine-word"><span>solving.</span></span></h2>
           </div>
@@ -635,7 +664,7 @@
               <div class="timeline-laser" data-timeline-laser></div>
             </div>
 
-            <div class="timeline-item is-active" data-timeline-item tabindex="0" role="button" aria-label="Milestone 2024: Undergraduate education">
+            <div class="timeline-item is-active cine-reveal" style="--cine-delay: 120ms" data-timeline-item tabindex="0" role="button" aria-label="Milestone 2024: Undergraduate education">
               <span class="year">2024</span>
               <div class="timeline-node-wrapper" aria-hidden="true">
                 <span class="timeline-node"></span>
@@ -647,7 +676,7 @@
               </div>
             </div>
 
-            <div class="timeline-item" data-timeline-item tabindex="0" role="button" aria-label="Milestone 2024+: Programming fundamentals">
+            <div class="timeline-item cine-reveal" style="--cine-delay: 240ms" data-timeline-item tabindex="0" role="button" aria-label="Milestone 2024+: Programming fundamentals">
               <span class="year">2024+</span>
               <div class="timeline-node-wrapper" aria-hidden="true">
                 <span class="timeline-node"></span>
@@ -659,7 +688,7 @@
               </div>
             </div>
 
-            <div class="timeline-item" data-timeline-item tabindex="0" role="button" aria-label="Milestone 2025+: Full-stack applications and hackathons">
+            <div class="timeline-item cine-reveal" style="--cine-delay: 360ms" data-timeline-item tabindex="0" role="button" aria-label="Milestone 2025+: Full-stack applications and hackathons">
               <span class="year">2025+</span>
               <div class="timeline-node-wrapper" aria-hidden="true">
                 <span class="timeline-node"></span>
@@ -671,7 +700,7 @@
               </div>
             </div>
 
-            <div class="timeline-item" data-timeline-item tabindex="0" role="button" aria-label="Milestone 2026: 5th Semester milestone">
+            <div class="timeline-item cine-reveal" style="--cine-delay: 480ms" data-timeline-item tabindex="0" role="button" aria-label="Milestone 2026: 5th Semester milestone">
               <span class="year">2026</span>
               <div class="timeline-node-wrapper" aria-hidden="true">
                 <span class="timeline-node"></span>
@@ -683,7 +712,7 @@
               </div>
             </div>
 
-            <div class="timeline-item" data-timeline-item tabindex="0" role="button" aria-label="Milestone Present: Continuous learning and systems engineering">
+            <div class="timeline-item cine-reveal" style="--cine-delay: 600ms" data-timeline-item tabindex="0" role="button" aria-label="Milestone Present: Continuous learning and systems engineering">
               <span class="year">Now</span>
               <div class="timeline-node-wrapper" aria-hidden="true">
                 <span class="timeline-node"></span>
@@ -1145,5 +1174,6 @@
     <script src="certifications-data.js"></script>
     <script src="certifications.js"></script>
     <script src="footer-cinematic.js"></script>
+    <script src="scripts/hologram.js"></script>
   </body>
 </html>

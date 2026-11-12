@@ -1219,6 +1219,13 @@ h1 .accent {
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.journey .timeline-item.cine-reveal {
+  transition:
+    opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--cine-delay, 0ms);
+}
+
 .timeline-item .year {
   order: 1;
   text-align: right;

@@ -1,0 +1,74 @@
+/* PAVAN hologram — tweak these to align with your hero */
+:root{--cut:url("../public/assets/pavan-cutout.png");--letters:url("../public/assets/pavan-letters.png");--cy:#19e6ff;--loop:8s;
+--bx:62.5%;--by:81%;--bw:34%;--hw:32%}
+/* demo hero (use your own hero; keep it position:relative) */
+.pv-hero{position:relative;width:100%;aspect-ratio:2576/1341;overflow:hidden;background:#02090d url("../public/assets/hero-bg.jpg") center/cover no-repeat}
+.hero::before{background-image:url("../public/assets/hero-bg.jpg")}
+.hero-artwork{width:min(100vw,calc(100svh * 1.92123));aspect-ratio:2000/1041;background:url("../public/assets/hero-bg.jpg") center/cover no-repeat}
+.pv-stage{position:absolute;inset:0;pointer-events:none}
+.pv-particles{position:absolute;inset:0;width:100%;height:100%}
+/* ---- rotating base ---- */
+.pv-base{position:absolute;left:var(--bx);top:var(--by);width:var(--bw);aspect-ratio:1;transform:translate(-50%,-50%) perspective(1400px) rotateX(72deg);animation:pvGlow var(--loop) linear infinite}
+.pv-base svg{width:100%;height:100%;overflow:visible}
+.pv-base g,.pv-base circle{transform-box:view-box;transform-origin:200px 200px}
+.r-out{animation:pvSpinCW 40s linear infinite}
+.r-seg{animation:pvSpinCCW 18s linear infinite}
+.r-seg2{animation:pvSpinCW 11s linear infinite}
+.node{fill:var(--cy);animation:pvBlink 2.4s ease-in-out infinite}
+.rip{animation:pvRip 3.6s ease-out infinite}
+.charge{animation:pvCharge var(--loop) ease-out infinite;opacity:0}
+@keyframes pvSpinCW{to{transform:rotate(360deg)}}
+@keyframes pvSpinCCW{to{transform:rotate(-360deg)}}
+@keyframes pvBlink{0%,100%{opacity:.2}50%{opacity:1}}
+@keyframes pvRip{0%{transform:scale(.35);opacity:.9}100%{transform:scale(1.25);opacity:0}}
+@keyframes pvCharge{0%{transform:scale(.1);opacity:0}5%{opacity:1}14%{transform:scale(1.08);opacity:0}100%{transform:scale(1.08);opacity:0}}
+@keyframes pvGlow{0%{filter:drop-shadow(0 0 4px var(--cy)) brightness(1)}10%,16%{filter:drop-shadow(0 0 16px var(--cy)) brightness(1.9)}40%,75%{filter:drop-shadow(0 0 10px var(--cy)) brightness(1.35)}92%,100%{filter:drop-shadow(0 0 4px var(--cy)) brightness(1)}}
+/* ---- light beam ---- */
+.pv-beam{position:absolute;left:var(--bx);bottom:calc(100% - var(--by));width:24%;height:60%;margin-left:-12%;transform-origin:50% 100%;clip-path:polygon(38% 100%,62% 100%,100% 0,0 0);background:linear-gradient(to top,rgba(25,230,255,.6),rgba(25,230,255,0));mix-blend-mode:screen;opacity:0;animation:pvBeam var(--loop) ease-in-out infinite}
+@keyframes pvBeam{0%{opacity:0;transform:scaleY(.05)}9%{opacity:1;transform:scaleY(1)}16%{opacity:.9}36%{opacity:.4}80%{opacity:.32}93%,100%{opacity:0;transform:scaleY(1)}}
+/* ---- hologram ---- */
+.pv-holo{position:absolute;left:var(--bx);bottom:calc(100% - var(--by) + 1%);width:var(--hw);margin-left:calc(var(--hw) / -2);aspect-ratio:1;-webkit-mask-image:radial-gradient(ellipse 62% 80% at 50% 38%,#000 58%,transparent 100%);mask-image:radial-gradient(ellipse 62% 80% at 50% 38%,#000 58%,transparent 100%);animation:pvGlitch var(--loop) linear infinite}
+.pv-tilt{position:absolute;inset:0;transform:perspective(900px) rotateY(var(--ry,0deg)) rotateX(var(--rx,0deg));transition:transform .25s ease-out}
+.pv-float{position:absolute;inset:0;animation:pvBob 4s ease-in-out infinite;filter:drop-shadow(0 0 10px rgba(25,230,255,.65))}
+.pv-clip{position:absolute;inset:0;clip-path:inset(100% 0 0 0);animation:pvClip var(--loop) linear infinite}
+.pv-photo,.pv-tint,.pv-lines,.pv-ghost{position:absolute;inset:0;-webkit-mask:var(--cut) center/contain no-repeat;mask:var(--cut) center/contain no-repeat}
+.pv-photo{background:var(--cut) center/contain no-repeat;-webkit-mask:none;mask:none;filter:grayscale(.65) contrast(1.25) brightness(1.2);opacity:.82}
+.pv-tint{background:linear-gradient(to top,#00a8c8,#19e6ff 55%,#b4f8ff);mix-blend-mode:color;opacity:.82}
+.pv-lines{background:repeating-linear-gradient(to bottom,rgba(0,20,30,.5) 0 1px,transparent 1px 4px);animation:pvLines 1s linear infinite}
+.pv-ghost{opacity:0;mix-blend-mode:screen}
+.pv-ghost.a{background:#ff2bd6;animation:pvGhostA var(--loop) linear infinite}
+.pv-ghost.b{background:#19e6ff;animation:pvGhostB var(--loop) linear infinite}
+.pv-bar{position:absolute;left:6%;right:6%;height:3px;bottom:0;opacity:0;background:linear-gradient(90deg,transparent,#e8feff,transparent);box-shadow:0 0 18px 4px var(--cy);animation:pvBar var(--loop) linear infinite}
+@keyframes pvBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.6%)}}
+@keyframes pvLines{to{background-position:0 16px}}
+@keyframes pvClip{0%,12%{clip-path:inset(100% 0 0 0);opacity:1}32%{clip-path:inset(0);opacity:1}33%{opacity:.55}34%{opacity:1}36%{opacity:.8}37%,60%{opacity:1}61%{opacity:.6}62%,78%{clip-path:inset(0);opacity:1}92%{clip-path:inset(0 0 100% 0);opacity:.25}100%{clip-path:inset(0 0 100% 0);opacity:0}}
+@keyframes pvBar{0%,12%{bottom:0;opacity:0}14%{opacity:1}31%{opacity:1}32.5%{bottom:100%;opacity:0}78%{bottom:100%;opacity:0}80%{opacity:1;bottom:100%}91%{bottom:0;opacity:1}93%,100%{bottom:0;opacity:0}}
+@keyframes pvGlitch{0%,32%{transform:none}33%{transform:translateX(-1.4%) skewX(4deg)}34%{transform:translateX(1.2%)}35%,60%{transform:none}61%{transform:translateX(.8%)}62%,100%{transform:none}}
+@keyframes pvGhostA{0%,32%{opacity:0;transform:none}33%{opacity:.55;transform:translateX(-3%)}34.5%{opacity:0}61%{opacity:.4;transform:translateX(-2%)}62.5%,100%{opacity:0}}
+@keyframes pvGhostB{0%,32%{opacity:0;transform:none}33.5%{opacity:.5;transform:translateX(3%)}35%{opacity:0}61.2%{opacity:.35;transform:translateX(2%)}62.5%,100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.pv-base,.pv-base *,.pv-beam,.pv-holo,.pv-float,.pv-clip,.pv-lines,.pv-ghost,.pv-bar{animation:none!important}.pv-clip{clip-path:none}.pv-beam{opacity:.35}.pv-particles{display:none}}
+
+/* ---- PAVAN word reacts to the hologram (clipped to the letter shapes) ---- */
+.pv-word,.pv-wordg{position:absolute;left:28.71%;top:23.85%;width:68.32%;aspect-ratio:1320/506;overflow:hidden;-webkit-mask:var(--letters) center/100% 100% no-repeat;mask:var(--letters) center/100% 100% no-repeat}
+.pv-word>*,.pv-wordg>*,.w-hold>*{position:absolute}
+.w-dim{inset:0;background:#02090d;opacity:0;animation:pvDim var(--loop) ease-in-out infinite}
+.w-hold{inset:0;opacity:0;animation:pvHold var(--loop) ease-in-out infinite}
+.w-pool{inset:0;background:radial-gradient(ellipse 30% 62% at 49% 62%,rgba(130,250,255,.55),transparent 72%)}
+.w-breath{inset:0;background:rgba(25,230,255,.2);animation:pvBreath 3.6s ease-in-out infinite alternate}
+.w-rise,.w-down{left:0;right:0;top:0;height:45%;background:linear-gradient(to bottom,transparent,rgba(170,252,255,.85) 70%,transparent);transform:translateY(230%)}
+.w-rise{animation:pvRise var(--loop) ease-in-out infinite}
+.w-down{animation:pvDown var(--loop) ease-in-out infinite}
+.w-sweep{top:0;bottom:0;left:0;width:20%;background:linear-gradient(90deg,transparent,rgba(200,254,255,.85),transparent);transform:translateX(-110%);animation:pvSweep var(--loop) ease-in-out infinite}
+.w-flare{inset:0;background:rgba(200,253,255,.8);opacity:0;animation:pvFlare var(--loop) ease-out infinite}
+.pv-wordg{opacity:.3}
+.pv-wordg>*{inset:0;opacity:0}
+.pv-wordg .a{background:#ff2bd6;animation:pvGhostA var(--loop) linear infinite}
+.pv-wordg .b{background:#19e6ff;animation:pvGhostB var(--loop) linear infinite}
+@keyframes pvDim{0%,2%{opacity:0}8%,12%{opacity:.6}32%,78%{opacity:.38}92%{opacity:.08}94%,100%{opacity:0}}
+@keyframes pvHold{0%,14%{opacity:0}22%,76%{opacity:1}90%,100%{opacity:0}}
+@keyframes pvBreath{from{opacity:.1}to{opacity:.9}}
+@keyframes pvRise{0%,3%{transform:translateY(230%)}14%,100%{transform:translateY(-110%)}}
+@keyframes pvDown{0%,78%{transform:translateY(-110%)}92%,100%{transform:translateY(230%)}}
+@keyframes pvSweep{0%,13%{transform:translateX(-110%)}32%,100%{transform:translateX(520%)}}
+@keyframes pvFlare{0%,92%{opacity:0}94%{opacity:.7}100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.pv-word *,.pv-wordg *{animation:none!important}.pv-word>*,.pv-wordg>*{opacity:0}}
