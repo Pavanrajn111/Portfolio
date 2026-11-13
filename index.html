@@ -20,10 +20,32 @@
     />
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="styles/hologram.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/loader.css" />
     <link rel="stylesheet" href="contact-cinematic.css" />
     <link rel="stylesheet" href="resume-cinematic.css" />
     <link rel="stylesheet" href="certifications.css" />
     <link rel="stylesheet" href="footer-cinematic.css" />
+    <script>
+      (function () {
+        var root = document.documentElement;
+        root.classList.add("pv-loading");
+        try {
+          if (sessionStorage.getItem("pvLoaderSeen") && !/[?&]loader/.test(location.search)) {
+            root.classList.add("pv-skip");
+            root.classList.remove("pv-loading");
+          }
+        } catch (error) {}
+      })();
+    </script>
+    <noscript>
+      <style>
+        #pvl { display: none; }
+        .pv-stage.pv-wait { opacity: 1; }
+        .pv-stage.pv-wait * { animation-play-state: running !important; }
+        html.pv-loading { overflow: auto; }
+      </style>
+    </noscript>
   </head>
   <body>
     <div class="page-shell">
@@ -47,7 +69,7 @@
         <section id="home" class="hero">
           <h1 class="sr-only hero-sr-heading">Pavan Raj N — Software Engineering Portfolio</h1>
           <div class="hero-artwork">
-            <div class="pv-stage" aria-hidden="true">
+            <div class="pv-stage pv-wait" aria-hidden="true">
               <div class="pv-word"><div class="w-dim"></div><div class="w-hold"><div class="w-pool"></div><div class="w-breath"></div></div><div class="w-rise"></div><div class="w-sweep"></div><div class="w-down"></div><div class="w-flare"></div></div>
               <div class="pv-wordg"><div class="a"></div><div class="b"></div></div>
               <canvas class="pv-particles"></canvas>
@@ -1170,10 +1192,28 @@
       </div>
     </dialog>
 
+    <div id="pvl" role="status" aria-live="polite" aria-label="Loading">
+      <div class="shock"></div>
+      <div class="box">
+        <div class="rw">
+          <svg viewBox="0 0 200 200" aria-hidden="true">
+            <g class="a1"><circle cx="100" cy="100" r="94" fill="none" stroke="#19e6ff" stroke-width="1" stroke-dasharray="1.5 5" opacity=".8"/></g>
+            <g class="a2"><circle cx="100" cy="100" r="84" pathLength="100" fill="none" stroke="#19e6ff" stroke-width="3" stroke-dasharray="30 4 20 4 30 4 6 2" opacity=".6"/></g>
+            <circle cx="100" cy="100" r="70" fill="none" stroke="rgba(25,230,255,.15)" stroke-width="4"/>
+            <circle class="arc" cx="100" cy="100" r="70" pathLength="100" fill="none" stroke="#19e6ff" stroke-width="4" stroke-linecap="round"/>
+            <circle class="rp" cx="100" cy="100" r="50" fill="none" stroke="#19e6ff" stroke-width="1.5"/>
+          </svg>
+          <div class="mid"><div class="num"><span data-pct>0</span><small>%</small></div></div>
+        </div>
+        <div class="stat" data-stat>INITIALIZING SYSTEM</div>
+        <div class="foot">PAVAN RAJ N &nbsp;&middot;&nbsp; INFORMATION SCIENCE &amp; ENGINEERING</div>
+      </div>
+    </div>
     <script src="script.js"></script>
     <script src="certifications-data.js"></script>
     <script src="certifications.js"></script>
     <script src="footer-cinematic.js"></script>
     <script src="scripts/hologram.js"></script>
+    <script src="scripts/loader.js"></script>
   </body>
 </html>

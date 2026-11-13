@@ -22,11 +22,13 @@
       r: Math.random() * 1.8 + .6, l: 0, m: 110 + Math.random() * 120 });
   };
   /* sync with the CSS loop and speed the rings up during charge-up */
-  setTimeout(() => {
+  const sync = () => {
     const all = document.getAnimations();
     const c = all.find(a => a.animationName === 'pvClip'); if (c && c.startTime != null) t0 = c.startTime;
     spin = all.filter(a => /^pvSpin/.test(a.animationName || ''));
-  }, 150);
+  };
+  window.pvStart = () => { stage.classList.remove('pv-wait'); setTimeout(sync, 150); };
+  if (!document.getElementById('pvl')) window.pvStart();
   const tick = now => {
     const ph = (((now - t0) % LOOP) + LOOP) % LOOP / LOOP, dis = ph > .78 && ph < .93, chg = ph < .14;
     const rate = chg ? 1 + 4 * Math.sin(Math.PI * ph / .14) : 1; spin.forEach(a => a.playbackRate = rate);
